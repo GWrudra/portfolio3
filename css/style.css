@@ -1801,3 +1801,453 @@ h1,
     transition-duration: 0.4s;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* ===== LEETCODE STATS SECTION ===== */
+.leetcode {
+    padding: 8rem 5%;
+    position: relative;
+    z-index: 2;
+}
+
+.leetcode::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+.leetcode-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.leetcode-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(16px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.leetcode-card:hover {
+    border-color: rgba(255, 161, 22, 0.25);
+    box-shadow: 0 0 24px rgba(255, 161, 22, 0.06);
+    transform: translateY(-4px);
+}
+
+/* Main solved card */
+.leetcode-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+}
+
+.leetcode-logo {
+    color: #ffa116;
+    margin-bottom: 0.75rem;
+    filter: drop-shadow(0 0 12px rgba(255, 161, 22, 0.3));
+}
+
+.leetcode-solved {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+}
+
+.leetcode-solved-count {
+    font-size: 3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffa116 0%, #ff6b00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    font-family: 'Archivo', sans-serif;
+}
+
+.leetcode-solved-total {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.leetcode-solved-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+
+.leetcode-profile-link {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #ffa116;
+    border: 1px solid rgba(255, 161, 22, 0.25);
+    border-radius: 100px;
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    transition: all 0.3s ease;
+}
+
+.leetcode-profile-link:hover {
+    background: rgba(255, 161, 22, 0.1);
+    border-color: #ffa116;
+    box-shadow: 0 0 16px rgba(255, 161, 22, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Difficulty stack */
+.leetcode-difficulty-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.leetcode-diff {
+    padding: 1.25rem 1.5rem;
+}
+
+.leetcode-diff-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.leetcode-diff-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.leetcode-diff-dot.easy {
+    background: #00b8a3;
+    box-shadow: 0 0 8px rgba(0, 184, 163, 0.4);
+}
+
+.leetcode-diff-dot.medium {
+    background: #ffc01e;
+    box-shadow: 0 0 8px rgba(255, 192, 30, 0.4);
+}
+
+.leetcode-diff-dot.hard {
+    background: #ff375f;
+    box-shadow: 0 0 8px rgba(255, 55, 95, 0.4);
+}
+
+.leetcode-diff-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: 'Archivo', sans-serif;
+}
+
+.leetcode-diff-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.leetcode-diff-fill {
+    height: 100%;
+    border-radius: 100px;
+    min-width: 4px;
+    transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.leetcode-diff-fill.easy {
+    background: linear-gradient(90deg, #00b8a3, #00e89d);
+}
+
+.leetcode-diff-fill.medium {
+    background: linear-gradient(90deg, #ffc01e, #ffa116);
+}
+
+.leetcode-diff-fill.hard {
+    background: linear-gradient(90deg, #ff375f, #ff6b9d);
+}
+
+.leetcode-diff-nums {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+}
+
+.leetcode-diff-solved {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    font-family: 'Archivo', sans-serif;
+}
+
+.leetcode-diff-total {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Streak stats stack */
+.leetcode-streak-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.leetcode-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.25rem 1.5rem;
+}
+
+.leetcode-stat-value {
+    font-size: 2rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffa116 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'Archivo', sans-serif;
+    line-height: 1;
+    margin-bottom: 0.35rem;
+}
+
+.leetcode-stat-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+}
+
+/* Heatmap image card */
+.leetcode-heatmap-card {
+    max-width: 1000px;
+    margin: 2rem auto 0;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 1.5rem;
+    backdrop-filter: blur(16px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.leetcode-heatmap-card:hover {
+    border-color: rgba(255, 161, 22, 0.2);
+    box-shadow: 0 8px 32px rgba(255, 161, 22, 0.06);
+}
+
+.leetcode-heatmap-card a {
+    display: block;
+}
+
+.leetcode-heatmap-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
+/* Light mode */
+body.light-mode .leetcode-diff-bar {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .leetcode-card:hover {
+    box-shadow: 0 8px 32px rgba(255, 161, 22, 0.1);
+}
+
+body.light-mode .leetcode-heatmap-card:hover {
+    box-shadow: 0 8px 32px rgba(255, 161, 22, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .leetcode-container {
+        grid-template-columns: 1fr;
+    }
+
+    .leetcode-difficulty-stack,
+    .leetcode-streak-stack {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .leetcode-solved-count {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .leetcode-difficulty-stack,
+    .leetcode-streak-stack {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== CERTIFICATIONS SECTION ===== */
+.certifications {
+    padding: 8rem 5%;
+    position: relative;
+    z-index: 2;
+}
+
+.certifications::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+.certs-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.cert-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 1.75rem;
+    backdrop-filter: blur(16px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.cert-card:hover {
+    border-color: rgba(0, 232, 157, 0.2);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 232, 157, 0.05);
+    transform: translateY(-4px);
+}
+
+.cert-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(0, 232, 157, 0.1) 0%, rgba(123, 97, 255, 0.08) 100%);
+    border: 1px solid rgba(0, 232, 157, 0.15);
+    color: var(--accent);
+}
+
+.cert-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+}
+
+.cert-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'Archivo', sans-serif;
+    line-height: 1.3;
+}
+
+.cert-issuer {
+    font-size: 0.82rem;
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.cert-date {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-family: 'IBM Plex Mono', monospace;
+    margin-top: 0.15rem;
+}
+
+/* Colored accent stripe */
+.cert-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 0 20px 20px 0;
+}
+
+.cert-badge.kaggle {
+    background: linear-gradient(180deg, #20beff, #1a9cd8);
+}
+
+.cert-badge.iit {
+    background: linear-gradient(180deg, #2c5f8a, #1a3a5c);
+}
+
+.cert-badge.aws {
+    background: linear-gradient(180deg, #ff9900, #e68a00);
+}
+
+.cert-badge.gdg {
+    background: linear-gradient(180deg, #4285f4, #34a853, #fbbc05, #ea4335);
+}
+
+.cert-badge.powerbi {
+    background: linear-gradient(180deg, #f2c811, #e0a800);
+}
+
+/* Light mode */
+body.light-mode .cert-card:hover {
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08), 0 0 20px rgba(0, 200, 130, 0.05);
+}
+
+body.light-mode .cert-icon {
+    background: linear-gradient(135deg, rgba(0, 200, 130, 0.1) 0%, rgba(98, 70, 234, 0.06) 100%);
+    border-color: rgba(0, 200, 130, 0.2);
+}
+
+/* 5th card spans full width centered */
+.certs-grid .cert-card:nth-child(5) {
+    grid-column: 1 / -1;
+    max-width: 490px;
+    justify-self: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .certs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .certs-grid .cert-card:nth-child(5) {
+        max-width: 100%;
+    }
+}
