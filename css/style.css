@@ -2224,6 +2224,10 @@ body.light-mode .leetcode-heatmap-card:hover {
     background: linear-gradient(180deg, #f2c811, #e0a800);
 }
 
+.cert-badge.nxtwave {
+    background: linear-gradient(180deg, #1a3c5e, #2b6777);
+}
+
 /* Light mode */
 body.light-mode .cert-card:hover {
     box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08), 0 0 20px rgba(0, 200, 130, 0.05);
@@ -2234,12 +2238,7 @@ body.light-mode .cert-icon {
     border-color: rgba(0, 200, 130, 0.2);
 }
 
-/* 5th card spans full width centered */
-.certs-grid .cert-card:nth-child(5) {
-    grid-column: 1 / -1;
-    max-width: 490px;
-    justify-self: center;
-}
+
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -2247,7 +2246,5 @@ body.light-mode .cert-icon {
         grid-template-columns: 1fr;
     }
 
-    .certs-grid .cert-card:nth-child(5) {
-        max-width: 100%;
-    }
+
 }
