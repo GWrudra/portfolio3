@@ -79,26 +79,47 @@ document.querySelectorAll('.btn').forEach(button => {
     });
 });
 
-// Contact form submission
+// Contact form submission via Web3Forms
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
+    contactForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
-        // Get form data
-        const formData = new FormData(this);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const message = formData.get('message');
+        const submitBtn = this.querySelector('.submit-btn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '⏳ Sending...';
+        submitBtn.disabled = true;
 
-        // Here you would typically send this to a server
-        console.log('Form submitted:', { name, email, message });
+        try {
+            const formData = new FormData(this);
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            });
 
-        // Show success message (you can customize this)
-        alert('Thank you for your message! I\'ll get back to you soon.');
+            const result = await response.json();
 
-        // Reset form
-        this.reset();
+            if (result.success) {
+                submitBtn.innerHTML = '✅ Message Sent!';
+                submitBtn.style.background = 'linear-gradient(135deg, #28c840, #00e89d)';
+                this.reset();
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.background = '';
+                    submitBtn.disabled = false;
+                }, 3000);
+            } else {
+                throw new Error(result.message || 'Something went wrong');
+            }
+        } catch (error) {
+            submitBtn.innerHTML = '❌ Failed — Try Again';
+            submitBtn.style.background = 'linear-gradient(135deg, #ff5f57, #ff375f)';
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.background = '';
+                submitBtn.disabled = false;
+            }, 3000);
+        }
     });
 }
 

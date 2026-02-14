@@ -5,8 +5,8 @@
 
 (function () {
     const CHARS = '!@#$%^&*()_+-={}[]|;:<>?/~`ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const ITERATIONS_PER_CHAR = 4; // How many scramble cycles before settling
-    const FRAME_DELAY = 35; // ms per frame
+    const ITERATIONS_PER_CHAR = 2; // How many scramble cycles before settling
+    const FRAME_DELAY = 20; // ms per frame
 
     class TextScramble {
         constructor(el) {
@@ -71,7 +71,7 @@
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
                 // Small delay so it feels intentional
-                setTimeout(() => scrambler.animate(), 200);
+                setTimeout(() => scrambler.animate(), 100);
                 observer.unobserve(el);
             }
         }, { threshold: 0.5 });

@@ -194,7 +194,7 @@
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
                 container.querySelectorAll('.skill-tag').forEach((tag, i) => {
-                    tag.style.animation = `tagPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) ${i * 0.08}s both`;
+                    tag.style.animation = `tagPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) ${i * 0.04}s both`;
                 });
                 observer.unobserve(container);
             }
