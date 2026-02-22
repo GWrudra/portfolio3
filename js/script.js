@@ -27,7 +27,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for scroll animations
-document.querySelectorAll('.about-content, .info-card, .project-card, .skill-card, .ai-tool-card, .contact-info, .contact-form').forEach(el => {
+document.querySelectorAll('.about-content, .info-card, .project-card, .skill-card, .ai-tool-card, .contact-info, .contact-form, .edu-card').forEach(el => {
     observer.observe(el);
 });
 
@@ -126,4 +126,8 @@ if (contactForm) {
 // Add stagger animation to project cards on load
 document.querySelectorAll('.project-card').forEach((card, index) => {
     card.style.transitionDelay = `${index * 0.1}s`;
+    // Clear delay after entrance animation so it doesn't affect 3D tilt
+    setTimeout(() => {
+        card.style.transitionDelay = '0s';
+    }, 800 + index * 100);
 });

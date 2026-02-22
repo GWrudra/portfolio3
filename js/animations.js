@@ -147,8 +147,51 @@
         updateGlow();
     }
 
-    // ---- TILT EFFECT ON CARDS ----
-    document.querySelectorAll('.project-card, .skill-card, .info-card').forEach(card => {
+    // ---- ENHANCED 3D TILT WITH LIGHT REFLECTION ----
+    const tiltCards = document.querySelectorAll('.project-card, .skill-card, .info-card, .edu-card, .cert-card');
+
+    // Clear CSS stagger delays after entrance animation so all cards tilt at same speed
+    const delayObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.transitionDelay = '0s';
+                }, 600);
+                delayObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    tiltCards.forEach(card => delayObserver.observe(card));
+
+    tiltCards.forEach(card => {
+        // Create light reflection overlay
+        const reflection = document.createElement('div');
+        reflection.classList.add('card-3d-reflection');
+        card.style.position = 'relative';
+        card.style.overflow = 'hidden';
+        card.appendChild(reflection);
+
+        let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+        let rafId = null;
+
+        function lerpTilt() {
+            currentX += (targetX - currentX) * 0.1;
+            currentY += (targetY - currentY) * 0.1;
+
+            card.style.transform = `perspective(600px) rotateX(${currentY}deg) rotateY(${currentX}deg) translateZ(10px)`;
+
+            // Move light reflection
+            const lightX = 50 + (currentX / 10) * 50;
+            const lightY = 50 + (currentY / 10) * 50;
+            reflection.style.background = `radial-gradient(circle at ${lightX}% ${lightY}%, rgba(255,255,255,0.12) 0%, transparent 60%)`;
+
+            if (Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) {
+                rafId = requestAnimationFrame(lerpTilt);
+            } else {
+                rafId = null;
+            }
+        }
+
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -156,16 +199,64 @@
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
 
-            const rotateX = ((y - centerY) / centerY) * -6;
-            const rotateY = ((x - centerX) / centerX) * 6;
+            targetX = ((x - centerX) / centerX) * 10;
+            targetY = ((y - centerY) / centerY) * -10;
 
-            card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+            reflection.style.opacity = '1';
+
+            if (!rafId) {
+                rafId = requestAnimationFrame(lerpTilt);
+            }
         });
 
         card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateY(0)';
+            targetX = 0;
+            targetY = 0;
+            reflection.style.opacity = '0';
+            if (!rafId) {
+                rafId = requestAnimationFrame(lerpTilt);
+            }
         });
     });
+
+    // ---- 3D HERO MOUSE PARALLAX ----
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        const heroH1 = hero.querySelector('h1');
+        const heroSubtitle = hero.querySelector('.subtitle');
+        const heroDesc = hero.querySelector('.description');
+        const heroCta = hero.querySelector('.cta-buttons');
+        const heroSocial = hero.querySelector('.social-links');
+        const heroBadge = hero.querySelector('.status-badge');
+
+        const layers = [
+            { el: heroH1, depth: 20 },
+            { el: heroSubtitle, depth: 15 },
+            { el: heroDesc, depth: 10 },
+            { el: heroCta, depth: 12 },
+            { el: heroSocial, depth: 8 },
+            { el: heroBadge, depth: 18 },
+        ];
+
+        let heroMouseX = 0, heroMouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            heroMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+            heroMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        });
+
+        function animateHeroParallax() {
+            layers.forEach(layer => {
+                if (layer.el) {
+                    const moveX = heroMouseX * layer.depth;
+                    const moveY = heroMouseY * layer.depth;
+                    layer.el.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+                }
+            });
+            requestAnimationFrame(animateHeroParallax);
+        }
+        animateHeroParallax();
+    }
 
     // ---- TEXT COUNTER / NUMBER ANIMATION ----
     // Animate any element with data-count attribute

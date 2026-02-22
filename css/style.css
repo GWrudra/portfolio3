@@ -627,6 +627,213 @@ h1 {
     stroke-linejoin: round;
 }
 
+/* ===== EDUCATION SECTION ===== */
+.education {
+    padding: 8rem 5%;
+    background: transparent;
+    position: relative;
+    z-index: 2;
+}
+
+.edu-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.edu-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2.25rem 2rem;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(16px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.edu-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.edu-card:nth-child(1).visible {
+    transition-delay: 0s;
+}
+
+.edu-card:nth-child(2).visible {
+    transition-delay: 0.15s;
+}
+
+.edu-card:nth-child(3).visible {
+    transition-delay: 0.3s;
+}
+
+/* Gradient top bar */
+.edu-top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+    border-radius: 24px 24px 0 0;
+}
+
+.edu-top-bar-active {
+    background: linear-gradient(90deg, var(--accent-secondary), var(--accent-pink));
+    animation: barGlow 2s ease-in-out infinite;
+}
+
+@keyframes barGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 8px rgba(123, 97, 255, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(123, 97, 255, 0.6), 0 0 40px rgba(123, 97, 255, 0.2);
+    }
+}
+
+/* Step number */
+.edu-step {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.03);
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1;
+    pointer-events: none;
+    transition: color 0.5s ease;
+}
+
+.edu-card:hover .edu-step {
+    color: rgba(0, 232, 157, 0.08);
+}
+
+/* Emoji */
+.edu-emoji {
+    font-size: 3rem;
+    margin-bottom: 1.25rem;
+    display: inline-block;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.edu-card:hover .edu-emoji {
+    transform: scale(1.2) rotate(-5deg);
+}
+
+/* Badge */
+.edu-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'IBM Plex Mono', monospace;
+    background: rgba(0, 232, 157, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(0, 232, 157, 0.2);
+    margin-bottom: 0.75rem;
+}
+
+.edu-badge-active {
+    background: rgba(123, 97, 255, 0.12);
+    color: var(--accent-secondary);
+    border-color: rgba(123, 97, 255, 0.25);
+}
+
+.edu-card h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.01em;
+}
+
+.edu-degree {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.edu-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+}
+
+.edu-location svg {
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+.edu-location a {
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.edu-location a:hover {
+    color: var(--accent);
+}
+
+/* Shimmer hover */
+.edu-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 232, 157, 0.04) 40%, rgba(123, 97, 255, 0.06) 50%, rgba(0, 232, 157, 0.04) 60%, transparent 100%);
+    transition: left 0.8s ease;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.edu-card:hover::after {
+    left: 100%;
+}
+
+.edu-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--border-glow);
+    box-shadow: var(--shadow-lg), 0 0 40px rgba(0, 232, 157, 0.06);
+    background: rgba(0, 232, 157, 0.03);
+}
+
+/* Current card glow */
+.edu-current {
+    border-color: rgba(123, 97, 255, 0.15);
+}
+
+.edu-current:hover {
+    box-shadow: var(--shadow-lg), 0 0 40px rgba(123, 97, 255, 0.08);
+    background: rgba(123, 97, 255, 0.03);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .edu-grid {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+    }
+}
+
 /* ===== SKILLS SECTION ===== */
 .skills {
     padding: 8rem 5%;
@@ -2228,6 +2435,10 @@ body.light-mode .leetcode-heatmap-card:hover {
     background: linear-gradient(180deg, #1a3c5e, #2b6777);
 }
 
+.cert-badge.letsupgrade {
+    background: linear-gradient(180deg, #ff6b35, #e63946);
+}
+
 /* Light mode */
 body.light-mode .cert-card:hover {
     box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08), 0 0 20px rgba(0, 200, 130, 0.05);
@@ -2247,4 +2458,61 @@ body.light-mode .cert-icon {
     }
 
 
+}
+
+
+/* ===== 3D ANIMATION EFFECTS ===== */
+
+/* Light reflection overlay on cards */
+.card-3d-reflection {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    mix-blend-mode: overlay;
+}
+
+/* 3D perspective container for cards */
+.projects-grid,
+.skills-grid,
+.edu-grid,
+.certs-grid {
+    perspective: 1200px;
+}
+
+/* Smooth 3D transitions on tilt cards */
+.project-card,
+.skill-card,
+.info-card,
+.edu-card,
+.cert-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 0.15s ease-out, box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
+}
+
+/* Hero elements smooth parallax */
+.hero h1,
+.hero .subtitle,
+.hero .description,
+.hero .cta-buttons,
+.hero .social-links,
+.hero .status-badge {
+    will-change: transform;
+    transition: transform 0.08s ease-out;
+}
+
+/* Section headers 3D entrance */
+.section-header {
+    opacity: 0;
+    transform: perspective(600px) rotateY(-4deg) translateX(-30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-header.animate-in {
+    opacity: 1;
+    transform: perspective(600px) rotateY(0) translateX(0);
 }
