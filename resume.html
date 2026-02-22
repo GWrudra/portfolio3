@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rudra Pratap Nayak — Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f0f0;
+            color: #1a1a1a;
+            line-height: 1.5;
+        }
+
+        .page {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: #fff;
+            border: 3px solid #3b5ec9;
+            padding: 2.5rem 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 2px solid #1a1a1a;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+
+        .header-right {
+            text-align: right;
+            font-size: 0.8rem;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .header-right a {
+            color: #444;
+            text-decoration: none;
+        }
+
+        .header-right a:hover {
+            color: #3b5ec9;
+        }
+
+        .header-subtitle {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 0.25rem;
+        }
+
+        /* Two column layout */
+        .content {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 0;
+        }
+
+        .left-col {
+            padding-right: 1.5rem;
+            border-right: 1px solid #ddd;
+        }
+
+        .right-col {
+            padding-left: 1.5rem;
+        }
+
+        /* Section titles */
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            margin-top: 1.25rem;
+            color: #1a1a1a;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        /* About text */
+        .about-text {
+            font-size: 0.8rem;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        /* Skills list */
+        .skills-list {
+            list-style: none;
+            font-size: 0.8rem;
+            color: #333;
+        }
+
+        .skills-list li {
+            padding: 0.15rem 0;
+        }
+
+        /* Education */
+        .edu-block {
+            margin-bottom: 0.5rem;
+        }
+
+        .edu-block .school {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .edu-block .details {
+            font-size: 0.78rem;
+            color: #555;
+        }
+
+        /* Right column items */
+        .experience-item {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .exp-company {
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .exp-role {
+            font-size: 0.78rem;
+            color: #555;
+        }
+
+        .exp-date {
+            font-size: 0.75rem;
+            color: #777;
+        }
+
+        .exp-details {
+            font-size: 0.78rem;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .exp-details ul {
+            padding-left: 1rem;
+        }
+
+        .exp-details li {
+            margin-bottom: 0.2rem;
+        }
+
+        /* Tags */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-top: 0.3rem;
+        }
+
+        .tech-tag {
+            font-size: 0.65rem;
+            padding: 0.15rem 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            color: #555;
+        }
+
+        /* Certifications grid */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.2rem 1.5rem;
+            font-size: 0.78rem;
+            color: #444;
+        }
+
+        .cert-grid li {
+            list-style: disc;
+            margin-left: 1rem;
+        }
+
+        /* Languages row */
+        .lang-row {
+            font-size: 0.8rem;
+            color: #333;
+        }
+
+        /* Divider row */
+        .section-row {
+            border-top: 1px solid #ddd;
+            padding-top: 1.25rem;
+            margin-top: 1.25rem;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 2px solid #1a1a1a;
+            font-size: 0.75rem;
+            color: #777;
+            font-style: italic;
+        }
+
+        /* Download button */
+        .download-section {
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 2rem;
+            background: #3b5ec9;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-download:hover {
+            background: #2d4aa3;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .page {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-right {
+                text-align: left;
+                margin-top: 0.75rem;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .left-col {
+                border-right: none;
+                border-bottom: 1px solid #ddd;
+                padding-right: 0;
+                padding-bottom: 1.25rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .right-col {
+                padding-left: 0;
+            }
+
+            .experience-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                border: none;
+            }
+
+            .download-section {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- Header -->
+        <div class="header">
+            <div>
+                <h1>Rudra Pratap<br>Nayak</h1>
+                <div class="header-subtitle">Computer Science Student</div>
+            </div>
+            <div class="header-right">
+                📞 7205673141<br>
+                💬 WhatsApp: 7653840964<br>
+                ✉️ <a href="mailto:rudrapnayak111@gmail.com">rudrapnayak111@gmail.com</a><br>
+                📍 Koraput, Odisha<br>
+                🔗 <a href="https://www.linkedin.com/in/rudra-pratap-nayak-226276324/" target="_blank">LinkedIn</a> ·
+                💻 <a href="https://github.com/GWrudra" target="_blank">GitHub</a>
+            </div>
+        </div>
+
+        <!-- Two Column Content -->
+        <div class="content">
+
+            <!-- LEFT COLUMN -->
+            <div class="left-col">
+
+                <div class="section-title">about</div>
+                <p class="about-text">
+                    Motivated and result-oriented Computer Science student with a strong debugging mindset and passion
+                    for coding. Seeking a Web Developer internship to apply my skills in real-world projects and achieve
+                    on-campus placement.
+                </p>
+
+                <div class="section-title">skills</div>
+                <ul class="skills-list">
+                    <li>HTML & CSS</li>
+                    <li>Python</li>
+                    <li>Java</li>
+                    <li>C++</li>
+                    <li>SQL</li>
+                    <li>Git & GitHub</li>
+                    <li>VS Code</li>
+                    <li>AI Tools</li>
+                </ul>
+
+                <div class="section-title">education</div>
+                <div class="edu-block">
+                    <div class="school">NIST University</div>
+                    <div class="details">
+                        Berhampur, Odisha<br>
+                        2024 – 2028<br>
+                        B.Tech in CSE<br>
+                        CGPA: 6.23
+                    </div>
+                </div>
+
+                <div class="section-title">languages</div>
+                <p class="lang-row">Hindi · English · Odia</p>
+
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="right-col">
+
+                <div class="section-title">projects</div>
+
+                <div class="experience-item">
+                    <div>
+                        <div class="exp-company">Portfolio Website</div>
+                        <div class="exp-role">Personal Project</div>
+                        <div class="exp-date">2025</div>
+                    </div>
+                    <div class="exp-details">
+                        <ul>
+                            <li>AI-assisted personal portfolio showcasing resume and personal details</li>
+                            <li>Built using modern web tools and AI collaboration</li>
+                        </ul>
+                        <div class="tech-tags">
+                            <span class="tech-tag">ChatGPT</span>
+                            <span class="tech-tag">Google Gravity</span>
+                            <span class="tech-tag">Claude</span>
+                            <span class="tech-tag">v0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div>
+                        <div class="exp-company">ID & Password Verifier</div>
+                        <div class="exp-role">Personal Project</div>
+                        <div class="exp-date">2025</div>
+                    </div>
+                    <div class="exp-details">
+                        <ul>
+                            <li>Python program that validates whether IDs and passwords meet required criteria</li>
+                            <li>Demonstrates logic building and input validation</li>
+                        </ul>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title section-row">certifications</div>
+                <ul class="cert-grid">
+                    <li>Power BI Workshop</li>
+                    <li>Intro to Programming — Kaggle</li>
+                    <li>DevOps Webinar</li>
+                    <li>AWS & Generative AI Workshop</li>
+                    <li>Academic Writing Skills</li>
+                    <li>AI for Students Workshop</li>
+                </ul>
+
+                <div class="section-title section-row">additional</div>
+                <div class="exp-details">
+                    <ul>
+                        <li>Internship in NIST University of OOPS in C++</li>
+                        <li>Actively learning and building projects</li>
+                        <li>Interested in Web Development and Software Engineering</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <span>References available upon request</span>
+            <span>I hope to hear from you!</span>
+        </div>
+    </div>
+
+    <!-- Download button OUTSIDE the resume -->
+    <div class="download-section">
+        <button class="btn-download" onclick="window.print()">⬇ Download as PDF</button>
+    </div>
+
+</body>
+
+</html>
